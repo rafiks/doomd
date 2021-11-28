@@ -137,6 +137,7 @@
 ;;
 ;; magit setting
 (setq magit-repository-directories '(("~/my-sandbox" . 7)))
+(setq dap-python-debugger 'debugpy)
 ;;
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
