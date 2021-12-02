@@ -29,7 +29,10 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "/Volumes/uploads/org")
+;;
+;; change my org directory after setting a gitea repository
+;; (setq org-directory "/Volumes/uploads/org") ;
+(setq org-directory "/Users/rafiks/org")
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -53,8 +56,9 @@
 (setq org-publish-project-alist
       '(
         ;; add all components below here ....
+        ;; moving to
         ("org-notes"
-         :base-directory "/Volumes/uploads/org/projects/blog"
+         :base-directory "/Users/rafiks/org/projects/blog"
          :base-extension "org"
          :publishing-directory "~/public_html/"
          :recursive t
@@ -63,7 +67,7 @@
          :auto-preamble t
          )
         ("journal"
-         :base-directory "/Volumes/uploads/org/projects/blog/journal"
+         :base-directory "/Users/rafiks/org/projects/blog/journal"
          ;;:base-extension "org"
          :publishing-directory "~/public_html/"
          :recursive t
@@ -71,7 +75,7 @@
          :publishing-function org-html-publish-to-html
          )
         ("org-static"
-         :base-directory "/Volumes/uploads/org/projects/blog"
+         :base-directory "/Users/rafiks/org/projects/blog"
          :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
          :publishing-directory "~/public_html/"
          :recursive t
@@ -84,26 +88,49 @@
 
 
 ;; org-journal settings
-;;
-(setq org-journal-dir "/Volumes/uploads/org/projects/blog/journal")
-(setq org-journal-file-type "Yearly")
-(setq org-journal-file-format "%Y.org")
+;;f
+;; doom emacs does not honor org-journal-dir for some reason
+;; needed to move journal to the main org dir
+(setq org-journal-dir "projects/blog/journal/")
+;; (setq org-capture-journal-file "p")
 
+(setq org-journal-file-type 'yearly)
+(setq org-journal-file-format "%Y.org")
+;;
+;; journal capture template
+;;
+;; unfortunately i am unable to integrate this into org-capture
+
+;; (after! or;; g
+;;  (defun org-journal-find-location ()
+;;    ;; Open today's journal, but specify a non-nil prefix argument in order to
+;;    ;; inhibit inserting the heading; org-capture will insert the heading.
+;;    (org-journal-new-entry t)
+;;    (unless (eq org-journal-file-type 'daily)
+;;      (org-narrow-to-subtree))
+;;    (goto-char (point-max))))
+
+;; (after! org
+;;  (add-to-list 'org-capture-templates '(("jj" "Journal entry" plain (function org-journal-find-location)
+;;                                 "** %(format-time-string org-journal-time-format)%^{Title}\n%i%?"
+;;                                  :jump-to-captured t :immediate-finish t))))
 ;; org-mode customizations
 ;;
 ;;
-(setq org-mobile-directory "/Volumes/uploads/MobileOrg")
-(setq org-mobile-inbox-for-pull "/Volumes/uploads/org/flagged.org")
+;; no longer using mobile org / switched to Plain Org
+;; 11/28/21
+;; (setq org-mobile-directory "/Volumes/uploads/MobileOrg")
+;; (setq org-mobile-inbox-for-pull "/Volumes/uploads/org/flagged.org")
 (setq org-agenda-files
       (delq nil
             (mapcar (lambda (x) (and (file-exists-p x) x))
-                    '("/Volumes/uploads/org/gtd.org"
-                      "/Volumes/uploads/org/work.org"
-                      "/Volumes/uploads/org/notes.org"
-                      "/Volumes/uploads/org/flagged.org"
-                      "/Volumes/uploads/org/personal/business.org"
-                      "/Volumes/uploads/org/personal/organizer.org"
-                      "/Volumes/uploads/org/routines.org"
+                    '("/Users/rafiks/org/gtd.org"
+                      "/Users/rafiks/org/work.org"
+                      "/Users/rafiks/org/notes.org"
+                      "/Users/rafiks/org/flagged.org"
+                      "/Users/rafiks/org/personal/business.org"
+                      "/Users/rafiks/org/personal/organizer.org"
+                      "/Users/rafiks/org/routines.org"
                       ))))
 
 ;;RTAGS
@@ -138,7 +165,29 @@
 ;; magit setting
 (setq magit-repository-directories '(("~/my-sandbox" . 7)))
 (setq dap-python-debugger 'debugpy)
+;; (setq dap-python-executable 'python3)
+
 ;;
+;; personal keyboard mapping
+;;
+;; (map! :localleader
+;;       :desc "Run-python"
+;;       "r" #'run-python)
+
+;; (map! :localleader
+;;       :desc "debugmode"
+;;       "d" #'dap-debug)
+
+
+;; (map! :localleader
+;;       :desc "breakpoint-toggle"
+;;       "b" #'dap-breakpoint-toggle)
+
+;; (map! :localleader
+;;       :desc "dap-disconnect"
+;;       "q" #'dap-disconnect)
+;; ;
+                                        ;
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
