@@ -10,6 +10,11 @@
 ;(package! some-package)
 (package! lsp-treemacs)
 (package! js-react-redux-yasnippets)
+(package! org-roam-bibtex
+  :recipe (:host github :repo "org-roam/org-roam-bibtex"))
+(unpin! org-roam)
+(unpin! bibtex-completion helm-bibtex ivy-bibtex)
+
 ;;(package! slime)
 ;; (package! eww)
 ;; (package! cmake-ide)

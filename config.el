@@ -131,6 +131,7 @@
                       "/Users/rafiks/org/personal/business.org"
                       "/Users/rafiks/org/personal/organizer.org"
                       "/Users/rafiks/org/routines.org"
+                      "/Users/rafiks/org/todo.org"
                       ))))
 
 ;;RTAGS
@@ -165,6 +166,18 @@
 ;; magit setting
 (setq magit-repository-directories '(("~/my-sandbox" . 7)))
 (setq dap-python-debugger 'debugpy)
+(setq dap-python-terminal "xterm -e")
+
+;; org-roam-bibtex
+(use-package! org-roam-bibtex
+  :after org-roam
+  :hook(org-mode . org-roam-bibtex-mode)
+  :config
+  (require 'org-ref))
+  ;; (setq orb-preformat-keywords
+  ;;       '("citekey" "title" "url" "file" "author-or-editor"
+  ;;         "keywords" "pdf" "doi" "author" "tags" "year" "author-bbrex")))
+
 ;; (setq dap-python-executable 'python3)
 
 ;;
